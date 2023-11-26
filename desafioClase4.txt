@@ -1,0 +1,1 @@
+[{"id":100000,"title":"hamburguesa","descripcion":"BigMac","precio":4500,"thumbnail":"rutaDeImagen","code":20,"stock":2000}]
