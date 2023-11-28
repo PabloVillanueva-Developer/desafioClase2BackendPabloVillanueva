@@ -8,13 +8,12 @@ let productArr = []
 
 class productManager {
     constructor(filePath, title, descripcion, precio, thumbnail, code, stock) {
-       /*      id++ // Aumenta numeracion automatica */
-            this.filePath = filePath
-           
-            this.checkId(id) // chequea codigo ID y si esta repetido genera uno diferente. El chequeo de ID es salteado en el proceso de update ID
           
+            this.filePath = filePath
+            
+            this.checkId()
             this.newProduct = {
-                id,
+                id, // asigna el ID luego de la verif. de repitencia en checkId()
                 title,
                 descripcion, 
                 precio,  
@@ -24,6 +23,7 @@ class productManager {
                     
             }    
         }
+
 
         // Funcion refactorizadora de Codigo | Lee Base de datos
         consultarBaseDatos() {
@@ -42,12 +42,15 @@ class productManager {
     
 
         // Metodo para verificar ID en la instancia de cracion de un objeto y evitar la repeticion
-        checkId (id) {     
+        checkId () {     
             this.consultarBaseDatos()
-            const idArr = productArr.map(productId => productId.id)
-            const maxId = Math.max(...idArr)
-            id = maxId + 1
-            return id
+            if(productArr.length === 0) {return id}
+            else {
+                const idArr = productArr.map(productId => productId.id)
+                const maxId = Math.max(...idArr)
+                id = maxId + 1
+                return id
+            }
         }
 
 
@@ -60,10 +63,7 @@ class productManager {
 
         // Metodo para agregar producto a lista de productos.
         addProduct = () => {
-            this.consultarBaseDatos()
-            
             productArr.push(this.newProduct) // agrega el nuevo producto instanciado a productArr 
-
             this.guardarBaseDatos()
         }
 
@@ -114,7 +114,8 @@ class productManager {
 
 // EJECUCION DE TEST
 const productoPrueba1 = new productManager('./desafioClase4.txt','Producto Prueba', 'Este es un producto prueba', 200, 'Sin imagen', 'abc123', 25) // Crea el objeto a nivel de codigo
-productoPrueba1.addProduct()
+/* console.log(productoPrueba1) */
+/* productoPrueba1.addProduct() */
 /* productoPrueba1.getProducts()
 productoPrueba1.getProductById(100000) */
 /* productoPrueba1.updateProductById(100000,'./desafioClase4.txt','HotDog', 'Completo Super XXL', 4500, 'rutaDeImagen', 20, 2000 )  */  // desactivar addProduct para esta prueba
