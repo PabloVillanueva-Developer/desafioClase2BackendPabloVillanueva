@@ -8,6 +8,7 @@ let productArr = []
 
 class productManager {
     constructor(filePath, title, descripcion, precio, thumbnail, code, stock) {
+        console.log(productArr)
       
        /*      id++ // Aumenta numeracion automatica */
             this.filePath = filePath
@@ -124,21 +125,10 @@ class productManager {
         }
 }
 
-const producto1 = new productManager('./desafioClase4.txt','hamburguesa', 'BigMac', 4500, 'rutaDeImagen', 20, 2000) // Crea el objeto a nivel de codigo
-/* const producto2 = new productManager('./desafioClase4.txt','sandwich', 'Crispy', 3500, 'rutaDeImagen', 50, 1500) */
-/* producto1.addProduct() */ // Agrega el objeto al array a nivel codigo y luego lo persiste en un archivo txt.
-/* producto1.addProduct() */
-/* 
-/* producto1.addProduct() */ 
-/* producto1.addProduct()   */
-/* producto1.deleteProducts(100002)*/
-producto1.updateProductById(100004,'./desafioClase4.txt','HotDog', 'Completo Super XXL', 4500, 'rutaDeImagen', 20, 2000 ) 
 
-/* producto2.addProduct() */
-/* const eliminarProducto = new productManager()*/
-/* eliminarProducto.removeProduct(100005)  */
-
-
-// falta ajustar el deleteProducts (busca producto por ID para eliminarlo.)
-// luego falta geProductById que debe devolver el producto y mostrarlo como objeto
-// Agregar updateProduct que busque por ID y reciba el objeto que debe ser actualizado por parametros (actualiza datos mas no el ID).
+const productoPrueba1 = new productManager('./desafioClase4.txt','Producto Prueba', 'Este es un producto prueba', 200, 'Sin imagen', 'abc123', 25) // Crea el objeto a nivel de codigo
+productoPrueba1.addProduct()
+/* productoPrueba1.getProducts()
+productoPrueba1.getProductById(100000) */
+/* productoPrueba1.updateProductById(100000,'./desafioClase4.txt','HotDog', 'Completo Super XXL', 4500, 'rutaDeImagen', 20, 2000 )  */// desactivar addProduct para esta prueba
+/* productoPrueba1.deleteProducts(100002) */ // desactivar resto de los metodos para esta prueba
