@@ -1,1 +1,1 @@
-[]
+[{"id":100000,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},{"id":100000,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},{"id":100000,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25}]
