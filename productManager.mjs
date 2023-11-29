@@ -116,5 +116,5 @@ const productoPrueba1 = new productManager('./productManager.json','Producto Pru
 /* productoPrueba1.addProduct() */
 /* productoPrueba1.getProducts()
 productoPrueba1.getProductById(100000) */
-/* productoPrueba1.updateProductById(100000,'./desafioClase4.txt','HotDog', 'Completo Super XXL', 4500, 'rutaDeImagen', 20, 2000 )  */  // desactivar addProduct para esta prueba
+/* productoPrueba1.updateProductById(100000,'./productManager.json','HotDog', 'Completo Super XXL', 4500, 'rutaDeImagen', 20, 2000 )  */  // desactivar addProduct para esta prueba
 /* productoPrueba1.deleteProducts(100002) */ // desactivar resto de los metodos para esta prueba
