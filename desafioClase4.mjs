@@ -1,5 +1,3 @@
-import { isUtf8 } from 'buffer'
-import { error } from 'console'
 import fs from 'fs'
 let id = 100000
 let productArr = []
@@ -113,7 +111,7 @@ class productManager {
 
 
 // EJECUCION DE TEST
-const productoPrueba1 = new productManager('./desafioClase4.txt','Producto Prueba', 'Este es un producto prueba', 200, 'Sin imagen', 'abc123', 25) // Crea el objeto a nivel de codigo
+const productoPrueba1 = new productManager('./productManager.json','Producto Prueba', 'Este es un producto prueba', 200, 'Sin imagen', 'abc123', 25) // Crea el objeto a nivel de codigo
 /* console.log(productoPrueba1) */
 /* productoPrueba1.addProduct() */
 /* productoPrueba1.getProducts()
