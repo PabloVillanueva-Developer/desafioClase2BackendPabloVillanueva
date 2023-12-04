@@ -3,8 +3,7 @@ let id = 100000
 let productArr = []
 
 
-
-class productManager {
+export class productManager {
     constructor(filePath, title, descripcion, precio, thumbnail, code, stock) {
           
             this.filePath = filePath
@@ -114,7 +113,10 @@ class productManager {
 const productoPrueba1 = new productManager('./productManager.json','Producto Prueba', 'Este es un producto prueba', 200, 'Sin imagen', 'abc123', 25) // Crea el objeto a nivel de codigo
 /* console.log(productoPrueba1) */
 /* productoPrueba1.addProduct() */
-/* productoPrueba1.getProducts()
-productoPrueba1.getProductById(100000) */
+/* productoPrueba1.getProducts() */
+/* productoPrueba1.getProductById(100001) */
 /* productoPrueba1.updateProductById(100000,'./productManager.json','HotDog', 'Completo Super XXL', 4500, 'rutaDeImagen', 20, 2000 )  */  // desactivar addProduct para esta prueba
-/* productoPrueba1.deleteProducts(100002) */ // desactivar resto de los metodos para esta prueba
+productoPrueba1.deleteProducts(100000) // desactivar resto de los metodos para esta prueba
+
+
+

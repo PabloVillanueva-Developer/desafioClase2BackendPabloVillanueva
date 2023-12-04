@@ -1,1 +1,13 @@
-[{"id":100000,"title":"HotDog","descripcion":"Completo Super XXL","precio":4500,"thumbnail":"rutaDeImagen","code":20,"stock":2000}]
+[{"id":100001,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},
+{"id":100002,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},
+{"id":100003,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},
+{"id":100004,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},
+{"id":100005,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},
+{"id":100006,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},
+{"id":100007,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},
+{"id":100008,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},
+{"id":100009,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},
+{"id":100010,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},
+{"id":100011,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},
+{"id":100012,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},
+{"id":100013,"title":"Producto Prueba","descripcion":"Este es un producto prueba","precio":200,"thumbnail":"Sin imagen","code":"abc123","stock":25}]
