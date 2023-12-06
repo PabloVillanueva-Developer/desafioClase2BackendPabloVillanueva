@@ -34,6 +34,7 @@ export class productManager {
         // Funcion refactorizadora de Codigo | Sobreescribe Base de datos
         guardarBaseDatos() {
             const listaproductosString = JSON.stringify(productArr) // transforma productArr en JSON
+            console.log(listaproductosString)
             fs.writeFileSync(this.filePath, listaproductosString, 'utf8') // sobreescribe archivo con los datos del nuevo array nuevos.
         }
     
@@ -54,7 +55,7 @@ export class productManager {
         // Metodo de consulta de productos registrados
         getProducts = async () => {
             const data = await fs.promises.readFile(this.filePath, 'utf8')
-            console.log(data)
+            return data
         }
 
 
@@ -77,10 +78,14 @@ export class productManager {
 
 
         getProductById = (id) => {
+            let selectedProduct
             this.consultarBaseDatos()
             for (const elemento of productArr) {
-                if(elemento.id === id)
-                    console.log(elemento)
+                if(elemento.id === id) {
+                    selectedProduct = elemento
+                    return selectedProduct
+                }
+            
             }
         }
 
@@ -110,13 +115,13 @@ export class productManager {
 
 
 // EJECUCION DE TEST
-const productoPrueba1 = new productManager('./productManager.json','Producto Prueba', 'Este es un producto prueba', 200, 'Sin imagen', 'abc123', 25) // Crea el objeto a nivel de codigo
-/* console.log(productoPrueba1) */
+/* const productoPrueba1 = new productManager('./productManager.json','Producto Prueba', 'Este es un producto prueba', 200, 'Sin imagen', 'abc123', 25) // Crea el objeto a nivel de codigo
+/* console.log(productoPrueba1) */ 
 /* productoPrueba1.addProduct() */
 /* productoPrueba1.getProducts() */
 /* productoPrueba1.getProductById(100001) */
 /* productoPrueba1.updateProductById(100000,'./productManager.json','HotDog', 'Completo Super XXL', 4500, 'rutaDeImagen', 20, 2000 )  */  // desactivar addProduct para esta prueba
-productoPrueba1.deleteProducts(100000) // desactivar resto de los metodos para esta prueba
+/* productoPrueba1.deleteProducts(100000)  */// desactivar resto de los metodos para esta prueba
 
 
 
