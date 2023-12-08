@@ -4,7 +4,7 @@ let productArr = []
 
 
 export class productManager {
-    constructor(filePath, title, descripcion, precio, thumbnail, code, stock) {
+    constructor(filePath, title, descripcion, price, thumbnail, code, stock) {
           
             this.filePath = filePath
             
@@ -13,10 +13,11 @@ export class productManager {
                 id, // asigna el ID luego de la verif. de repitencia en checkId()
                 title,
                 descripcion, 
-                precio,  
+                price,  
                 thumbnail,
                 code, 
-                stock    
+                stock,
+                stauts: true
                     
             }    
         }
@@ -90,7 +91,7 @@ export class productManager {
         }
 
 
-        updateProductById = (id, filePath, title, descripcion, precio, thumbnail, code, stock) => {
+        updateProductById = (id, title, descripcion, price, thumbnail, code, stock) => {
             let objetoActualizado
             let idCapturado
             this.consultarBaseDatos()
@@ -99,7 +100,7 @@ export class productManager {
                     idCapturado = elemento.id
                     elemento.title = title;
                     elemento.descripcion = descripcion;
-                    elemento.precio = precio;
+                    elemento.price = price;
                     elemento.thumbnail = thumbnail;
                     elemento.code = code;
                     elemento.stock = stock;
