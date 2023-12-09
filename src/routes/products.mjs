@@ -3,7 +3,7 @@ import { productManager } from '../../productManager.mjs'
 
 export const productRoutes = Router()
 
-const appProductManager = new productManager('./productManager.json','Producto Nuevo', 'Este es un producto prueba', 1500, 'Ruta de imagen', 'abc123', 25)
+const appProductManager = new productManager('./productos.json','Producto Nuevo', 'Este es un producto prueba', 1500, 'Ruta de imagen', 'abc123', 25)
 
 
 productRoutes.get('/:pId?', async (req, res) => {
@@ -49,6 +49,22 @@ productRoutes.post('/', async (req, res) => {
 // Datos fijos definidos para pruebas
 productRoutes.put('/:pId?', async (req, res) => {
     const pId = req.params.pId
-   const updateProduct = appProductManager.updateProductById(+pId, 'PUT producto editado', 'Producto Editado', 5000, 'Sin imagen', 'dsz321', 105)
-   res.send(updateProduct)
+    const data = req.body
+    appProductManager.updateProductById(+pId, 'Producto editado con PUT', 'Producto Editado con PUT', 5000, 'Sin imagen', 'dsz321', 105)
+  
+    res.status(200).json({
+    mensaje: 'Operación PUT completada con éxito',
+    datosActualizados: data})
+})
+
+
+// Datos fijos definidos para pruebas
+productRoutes.delete('/:pId?', async (req, res) => {
+   const pId = req.params.pId
+   const data = req.body
+   appProductManager.deleteProducts(+pId)
+
+   res.status(200).json({
+    mensaje: 'Operación DELETE completada con éxito',
+    datosActualizados: data})
 })
