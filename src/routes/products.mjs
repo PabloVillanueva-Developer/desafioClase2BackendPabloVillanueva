@@ -42,7 +42,12 @@ productRoutes.get('/:pId?', async (req, res) => {
 // Postea producto definidos por parametros al crer instancia de productManager
 productRoutes.post('/', async (req, res) => {
     const newProduct =  appProductManager.addProduct()  
-    res.send (newProduct)
+console.log(newProduct)
+
+    res.status(200).json({
+        mensaje: 'Operación PUT completada con éxito',
+        datosActualizados: newProduct
+    })
 })
 
 

@@ -62,6 +62,7 @@ export class productManager {
         addProduct = () => {
             productArr.push(this.newProduct) // agrega el nuevo producto instanciado a productArr 
             this.guardarBaseDatos()
+            return this.newProduct
         }
 
 
