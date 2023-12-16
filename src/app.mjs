@@ -15,3 +15,5 @@ app.listen(PORT, () => {
 
 app.use('/api/products', productRoutes)
 app.use('/api/carts', cartsRoutes)
+
+app.use(express.static('public'))
