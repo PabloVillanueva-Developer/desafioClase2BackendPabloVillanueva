@@ -24,6 +24,13 @@ app.engine('handlebars',handlebars.engine({ defaultLayout: 'home' })); // Define
 app.set('view engine', 'handlebars'); // Establece 'handlebars' como la extensión de archivo para las plantillas(ej main.handlebars), indicando que se utilizará el motor Handlebars para renderizarlas.
 app.set('views', __dirname+'/views' ) // Establece la ruta del directorio de vistas. Indica que las plantillas se encuentran en el directorio 'views' que está ubicado en el mismo directorio que el archivo de configuración.
 
+
+io.on('connection', (socket) => {
+    console.log('Nuevo Cliente Conectado por socket.io');
+});
+
+
+
 // Llamado y definicion de enrutamientos
 app.use(express.static(__dirname+'/public'))
 app.use('/api/products', productRoutes)
@@ -37,24 +44,10 @@ app.use('/realTimeProducts', routerViewsRealTimeProducts)
 
 
 // Creamos evento 'connection" en el servidor para que detecte una nueva conexion del lado del cliente. Cuando sucede esto se establece el handsahke.
-io.on('connection', (socket) => {
-    console.log('Nuevo Cliente Conectado por socket.io');
-    
-
-    // metodos de envio de informacion al socket del cliente desde el lado del servidor
-socket.emit('productData', productsData)
-
-socket.on('updateProductData', (updatedData) => {
-    productsData = updatedData;
-    io.emit('productData', productsData); // Emitir a todos los clientes
-});
 
 
-// Escuchamos eventos para actualizar los datos y emitirlos a todos los clientes
-   
-/* socket.broadcast.emit('eventoParaTodosMenosElSocketActual', 'Este mensaje lo veran todos los sockets conectados menos el actual')
-io.emit('eventoParaTodos', 'este mensaje lo reciben todos los sockets conectados') */
-});
+
+
 
 
 

@@ -52,11 +52,17 @@ productRoutes.post('/', async (req, res) => {
         status
     } = req.body;
 
-    const newProduct =  appProductManager.addProduct(title, description, price, thumbnail, code, stock, status)  
-    console.log(newProduct)
-    io.emit('productAdded',newProduct)
+    const newProduct =  appProductManager.addProduct(title, description, price, thumbnail, code, stock, status) 
+    const newProdcutList = await appProductManager.getProducts() 
+   // Manejar la conexión inicial
+        io.on('connection', (socket) => {
+            console.log('Server 1: Nuevo cliente conectado');
+            // Emitir un evento personalizado a server2
+            socket.emit('handshake', newProdcutList);
+        });
+      
     res.status(200).json({
-        mensaje: 'Operación PUT completada con éxito',
+        mensaje: 'Operación POST completada con éxito',
         datosActualizados: newProduct
     })
 })
