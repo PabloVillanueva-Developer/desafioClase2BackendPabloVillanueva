@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { productManager } from '../../productManager.mjs'
+import { io } from "../app.mjs";
 
 export const productRoutes = Router()
 
@@ -53,7 +54,7 @@ productRoutes.post('/', async (req, res) => {
 
     const newProduct =  appProductManager.addProduct(title, description, price, thumbnail, code, stock, status)  
     console.log(newProduct)
-
+    io.emit('productAdded',newProduct)
     res.status(200).json({
         mensaje: 'Operación PUT completada con éxito',
         datosActualizados: newProduct

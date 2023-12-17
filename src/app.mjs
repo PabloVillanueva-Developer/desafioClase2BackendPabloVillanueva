@@ -1,19 +1,65 @@
 import express from 'express'
 import { productRoutes } from './routes/products.mjs'
+import handlebars from 'express-handlebars'
 import { cartsRoutes } from './routes/carts.mjs'
+import { routerViews, routerViewsRealTimeProducts } from './routes/views.router.mjs'
+import { productsData } from './routes/views.router.mjs'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { Server } from 'socket.io'
+const __filename = fileURLToPath(import.meta.url); //  proporciona la ruta completa al archivo actual, incluyendo el nombre del archivo (app.mjs en este caso).
+const __dirname = dirname(__filename); // proporciona la ruta completa al directorio que contiene el archivo actual.
 const PORT = 8080
-const app = express()
+const app = express() // Iniciacializacion y activacion de Server mediante Express 
+const httpServer = app.listen(PORT, () => {console.log(`Servidor activo escuchando por puerto ${PORT}`)}) // Asignamos la escucha de nuestro servidor a una variable.
+export const io = new Server(httpServer)
 
 
-// Iniciacializacion y activacion de Server mediante Express por puerto 8080 
-
-app.use(express.json())
+// Codificacion base para express
+app.use(express.json()) // configuracion para leer archivos json
 app.use(express.urlencoded({extended: true}))
-app.listen(PORT, () => {
-    console.log(`Servidor activo escuchando por puerto ${PORT}`)
-})
 
+// Configuración de Handlebars como motor de plantillas
+app.engine('handlebars',handlebars.engine({ defaultLayout: 'home' })); // Define Handlebars como el motor de plantillas y configura su uso en la aplicación. Establece el layput principal como 'main'
+app.set('view engine', 'handlebars'); // Establece 'handlebars' como la extensión de archivo para las plantillas(ej main.handlebars), indicando que se utilizará el motor Handlebars para renderizarlas.
+app.set('views', __dirname+'/views' ) // Establece la ruta del directorio de vistas. Indica que las plantillas se encuentran en el directorio 'views' que está ubicado en el mismo directorio que el archivo de configuración.
+
+// Llamado y definicion de enrutamientos
+app.use(express.static(__dirname+'/public'))
 app.use('/api/products', productRoutes)
 app.use('/api/carts', cartsRoutes)
+app.use('/', routerViews)
+app.use('/realTimeProducts', routerViewsRealTimeProducts)
 
-app.use(express.static('public'))
+// Creamos instancia nueva de servidor habilitado para sockets viviendo dentro de nuestro servidor principal (https)
+
+
+
+
+// Creamos evento 'connection" en el servidor para que detecte una nueva conexion del lado del cliente. Cuando sucede esto se establece el handsahke.
+io.on('connection', (socket) => {
+    console.log('Nuevo Cliente Conectado por socket.io');
+    
+
+    // metodos de envio de informacion al socket del cliente desde el lado del servidor
+socket.emit('productData', productsData)
+
+socket.on('updateProductData', (updatedData) => {
+    productsData = updatedData;
+    io.emit('productData', productsData); // Emitir a todos los clientes
+});
+
+
+// Escuchamos eventos para actualizar los datos y emitirlos a todos los clientes
+   
+/* socket.broadcast.emit('eventoParaTodosMenosElSocketActual', 'Este mensaje lo veran todos los sockets conectados menos el actual')
+io.emit('eventoParaTodos', 'este mensaje lo reciben todos los sockets conectados') */
+});
+
+
+
+
+
+
+
+
