@@ -1,10 +1,19 @@
 import { Router } from "express";
 import { productManager } from "../../productManager.mjs";
-import { io } from "../app.mjs";
 const appProductManager = new productManager('./productos.json')
 export const routerViews = Router()
 export const routerViewsRealTimeProducts = Router()
-export let productsData
+let productsData
+import { io } from "../app.mjs";
+
+
+
+
+/* io.on('prueba', (data) => {
+  console.log('ya casi estas!!!!!!!!!!!!!!')
+
+}) */
+
 
 
 // Test de renderizado
@@ -20,18 +29,10 @@ routerViews.get('/', async (req, res) => {
   routerViewsRealTimeProducts.get('/', async (req, res) => {
     productsData = await appProductManager.getProducts();
     res.render('realTimeProducts', { productsData });
-
-    io.on('connection', (socket) => {
-      console.log('Server 2: Nuevo cliente conectado');
-    
-      // Escuchar el evento de handshake desde server1
-      socket.on('handshake', (message) => {
-        console.log('Server 2 recibió handshake:', message);
-      });
- 
-
 });
-  })
+
+
+
 
 
     

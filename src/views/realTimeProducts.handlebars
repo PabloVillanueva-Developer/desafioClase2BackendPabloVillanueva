@@ -1,12 +1,16 @@
 <div>
+    <button id="POSTbutton">Realizar POST </button>
+    <button id="DELETEbutton">Realizar DELETE </button>
+    <input id="inPutData" type="text">
     <h1>Lista Productos Actualizada con socket.io: 
-        <p class="listaProductos"> 
+        <p id="outPutData" class="listaProductos"> 
             {{productsData}}
         </p>
     </h1>
 </div>
 
+ <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>   <!-- Permite instanciar el socket desde el lado del cliente -->
-<script src="js/index.mjs"></script> <!-- vinculamos logica JS del cliente, para que este disponible en la renderizacion del lado del servidor -->
+<script type="module" src="js/index.mjs"></script> <!-- vinculamos logica JS del cliente, para que este disponible en la renderizacion del lado del servidor -->
 
 

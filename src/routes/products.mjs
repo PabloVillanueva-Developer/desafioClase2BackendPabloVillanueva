@@ -54,18 +54,16 @@ productRoutes.post('/', async (req, res) => {
 
     const newProduct =  appProductManager.addProduct(title, description, price, thumbnail, code, stock, status) 
     const newProdcutList = await appProductManager.getProducts() 
-   // Manejar la conexión inicial
-        io.on('connection', (socket) => {
-            console.log('Server 1: Nuevo cliente conectado');
-            // Emitir un evento personalizado a server2
-            socket.emit('handshake', newProdcutList);
-        });
-      
+    io.emit('actualizacionListaProductos', newProdcutList)
+ 
     res.status(200).json({
         mensaje: 'Operación POST completada con éxito',
-        datosActualizados: newProduct
+        datosActualizados: newProdcutList
+        
     })
 })
+
+
 
 
 // Datos fijos definidos para pruebas
@@ -85,6 +83,9 @@ productRoutes.delete('/:pId?', async (req, res) => {
    const pId = req.params.pId
    const data = req.body
    appProductManager.deleteProducts(+pId)
+   const newProdcutList = await appProductManager.getProducts() 
+   io.emit('actualizacionListaProductos', newProdcutList)
+
 
    res.status(200).json({
     mensaje: 'Operación DELETE completada con éxito',

@@ -3,6 +3,7 @@ import { cartManager } from '../../cartManager.mjs'
 const appCartManager = new cartManager('./carrito.json', 'Agua Saborizada', [2])
 const appProductManager = new cartManager('./productos.json')
 export const cartsRoutes = Router()
+import { io} from "../app.mjs";
 
 
 cartsRoutes.get('/', async (req, res) => {

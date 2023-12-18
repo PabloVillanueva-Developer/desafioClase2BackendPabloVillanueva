@@ -1,18 +1,31 @@
-import express from 'express'
-import { productRoutes } from './routes/products.mjs'
-import handlebars from 'express-handlebars'
-import { cartsRoutes } from './routes/carts.mjs'
-import { routerViews, routerViewsRealTimeProducts } from './routes/views.router.mjs'
-import { productsData } from './routes/views.router.mjs'
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import { Server } from 'socket.io'
-const __filename = fileURLToPath(import.meta.url); //  proporciona la ruta completa al archivo actual, incluyendo el nombre del archivo (app.mjs en este caso).
-const __dirname = dirname(__filename); // proporciona la ruta completa al directorio que contiene el archivo actual.
 const PORT = 8080
 const app = express() // Iniciacializacion y activacion de Server mediante Express 
 const httpServer = app.listen(PORT, () => {console.log(`Servidor activo escuchando por puerto ${PORT}`)}) // Asignamos la escucha de nuestro servidor a una variable.
+import { Server } from 'socket.io'
 export const io = new Server(httpServer)
+import express from 'express'
+import handlebars from 'express-handlebars'
+import { productRoutes } from './routes/products.mjs'
+import { cartsRoutes } from './routes/carts.mjs'
+import { routerViews, routerViewsRealTimeProducts, } from './routes/views.router.mjs'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+
+const __filename = fileURLToPath(import.meta.url); //  proporciona la ruta completa al archivo actual, incluyendo el nombre del archivo (app.mjs en este caso).
+const __dirname = dirname(__filename); // proporciona la ruta completa al directorio que contiene el archivo actual.
+
+
+
+io.on('connection', (socket) => {
+    console.log('Nuevo Cliente Conectado por socket.io');
+  
+    socket.on('envioListaActualizadaIndex-App', (listaActualizada) => {
+
+        io.emit('prueba', listaActualizada)
+        // Aquí puedes realizar acciones adicionales en respuesta al evento del servidor
+      });
+  });
 
 
 // Codificacion base para express
@@ -25,18 +38,18 @@ app.set('view engine', 'handlebars'); // Establece 'handlebars' como la extensi�
 app.set('views', __dirname+'/views' ) // Establece la ruta del directorio de vistas. Indica que las plantillas se encuentran en el directorio 'views' que está ubicado en el mismo directorio que el archivo de configuración.
 
 
-io.on('connection', (socket) => {
-    console.log('Nuevo Cliente Conectado por socket.io');
-});
 
 
-
-// Llamado y definicion de enrutamientos
 app.use(express.static(__dirname+'/public'))
 app.use('/api/products', productRoutes)
 app.use('/api/carts', cartsRoutes)
 app.use('/', routerViews)
 app.use('/realTimeProducts', routerViewsRealTimeProducts)
+
+
+
+// Llamado y definicion de enrutamientos
+
 
 // Creamos instancia nueva de servidor habilitado para sockets viviendo dentro de nuestro servidor principal (https)
 
