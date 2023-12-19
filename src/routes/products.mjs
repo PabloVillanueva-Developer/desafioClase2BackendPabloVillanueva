@@ -52,14 +52,13 @@ productRoutes.post('/', async (req, res) => {
         status
     } = req.body;
 
-    const newProduct =  appProductManager.addProduct(title, description, price, thumbnail, code, stock, status) 
+    appProductManager.addProduct(title, description, price, thumbnail, code, stock, status) 
     const newProdcutList = await appProductManager.getProducts() 
-    io.emit('actualizacionListaProductos', newProdcutList)
+    io.emit('actualizacionListaProductos', newProdcutList) // Este socket emite info al socket receptor de index.mjs
  
     res.status(200).json({
         mensaje: 'Operación POST completada con éxito',
         datosActualizados: newProdcutList
-        
     })
 })
 

@@ -1,16 +1,7 @@
 const socket = io();
 let outputData = document.getElementById('outPutData')
 let inputData = document.getElementById('inPutData')
-console.log(inputData)
 
-
-socket.on('actualizacionListaProductos', (nuevaListaProductos) => {
-    outputData.innerHTML = nuevaListaProductos
-    socket.emit('envioListaActualizadaIndex-App', nuevaListaProductos )
-  });
-
-
-  
 const postData = {
     "title":"productTest",
     "description":"Este es un producto de prueba",
@@ -21,8 +12,6 @@ const postData = {
     "status":"true"
 }
 
-
-
 const postClick = async () => {
     try {
       // Realiza una solicitud POST al servidor y espera la respuesta
@@ -32,7 +21,6 @@ const postClick = async () => {
         console.error('Error en la solicitud:', error);
     }
 };
-
 
 const deleteClick = async () => {
     try {
@@ -46,11 +34,15 @@ const deleteClick = async () => {
     }
 };
 
-
 // Agrega un evento de clic al botón
 const postButton = document.getElementById('POSTbutton');
 const deleteButton = document.getElementById('DELETEbutton')
 postButton.addEventListener('click', postClick);
 deleteButton.addEventListener('click', deleteClick)
+
+// Socket receptor de lista de productos desde metodo POST de products.mks
+socket.on('actualizacionListaProductos', (nuevaListaProductos) => {
+  outputData.innerHTML = nuevaListaProductos
+});
 
 

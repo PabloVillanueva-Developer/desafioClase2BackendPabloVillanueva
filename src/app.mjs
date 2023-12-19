@@ -11,22 +11,8 @@ import { routerViews, routerViewsRealTimeProducts, } from './routes/views.router
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-
 const __filename = fileURLToPath(import.meta.url); //  proporciona la ruta completa al archivo actual, incluyendo el nombre del archivo (app.mjs en este caso).
 const __dirname = dirname(__filename); // proporciona la ruta completa al directorio que contiene el archivo actual.
-
-
-
-io.on('connection', (socket) => {
-    console.log('Nuevo Cliente Conectado por socket.io');
-  
-    socket.on('envioListaActualizadaIndex-App', (listaActualizada) => {
-
-        io.emit('prueba', listaActualizada)
-        // Aquí puedes realizar acciones adicionales en respuesta al evento del servidor
-      });
-  });
-
 
 // Codificacion base para express
 app.use(express.json()) // configuracion para leer archivos json
@@ -37,26 +23,11 @@ app.engine('handlebars',handlebars.engine({ defaultLayout: 'home' })); // Define
 app.set('view engine', 'handlebars'); // Establece 'handlebars' como la extensión de archivo para las plantillas(ej main.handlebars), indicando que se utilizará el motor Handlebars para renderizarlas.
 app.set('views', __dirname+'/views' ) // Establece la ruta del directorio de vistas. Indica que las plantillas se encuentran en el directorio 'views' que está ubicado en el mismo directorio que el archivo de configuración.
 
-
-
-
 app.use(express.static(__dirname+'/public'))
 app.use('/api/products', productRoutes)
 app.use('/api/carts', cartsRoutes)
 app.use('/', routerViews)
 app.use('/realTimeProducts', routerViewsRealTimeProducts)
-
-
-
-// Llamado y definicion de enrutamientos
-
-
-// Creamos instancia nueva de servidor habilitado para sockets viviendo dentro de nuestro servidor principal (https)
-
-
-
-
-// Creamos evento 'connection" en el servidor para que detecte una nueva conexion del lado del cliente. Cuando sucede esto se establece el handsahke.
 
 
 
