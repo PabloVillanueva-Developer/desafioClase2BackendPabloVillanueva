@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { productManager } from "../../productManager.mjs";
+import { productManager } from "./productManager.mjs";
 const appProductManager = new productManager('./productos.json')
 export const routerViews = Router()
 export const routerViewsRealTimeProducts = Router()
 let productsData
-import { io } from "../app.mjs";
+import { io } from "../../app.mjs";
 
 
 // Test de renderizado
