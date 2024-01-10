@@ -5,8 +5,8 @@ import { Product } from "../../dao/models/products.models.mjs";
 
 export const productRoutes = Router()
 
-const appProductManager = new productManager('./productos.json','Producto Nuevo', 'Este es un producto prueba', 1500, 'Ruta de imagen', 'abc123', 25)
-
+/* const appProductManager = new productManager('./productos.json','Producto Nuevo', 'Este es un producto prueba', 1500, 'Ruta de imagen', 'abc123', 25)
+ */
 
 productRoutes.get('/:pId?', async (req, res) => {
     const limit = req.query.param1;
@@ -56,7 +56,9 @@ productRoutes.post('/', async (req, res) => {
     });
 
     const productoGuardado = await nuevoProducto.save();
-    io.emit('actualizacionListaProductos', productoGuardado) // Este socket emite info al socket receptor de index.mjs cliente para que lo renderice
+        const listaProductosCompleta = await Product.find()
+        console.log()
+    io.emit('actualizacionListaProductos', listaProductosCompleta) // Este socket emite info al socket receptor de index.mjs cliente para que lo renderice
  
     res.status(200).json({
         mensaje: 'Operación POST completada con éxito',
@@ -99,6 +101,7 @@ productRoutes.delete('/:pId?', async (req, res) => {
    const pId = req.params.pId
   /*  const data = req.body */
    try {
+    
         const productToDelete = await Product.findById(pId)
         await productToDelete.deleteOne()
         console.log(productToDelete)
@@ -109,7 +112,7 @@ productRoutes.delete('/:pId?', async (req, res) => {
         }
     
    
-    io.emit('actualizacionListaProductos', productToDelete)
+    io.emit('actualizacionListaProductos', await Product.find())
 
    res.status(200).json({
         mensaje: 'Operación DELETE completada con éxito',

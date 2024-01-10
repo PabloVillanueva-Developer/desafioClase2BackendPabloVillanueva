@@ -1,7 +1,24 @@
 <div>
-    <button id="POSTbutton">Realizar POST </button>
-    <button id="DELETEbutton">Realizar DELETE </button>
-    <input id="inPutData" type="text">
+    <label for="Title">Title:</label>
+    <input type="text" id="Title" name="title"><br><br></input>
+    <label for="Description">Description:</label>
+    <input type="text" id="Description" name="Description"><br><br></input>
+    <label for="Price">Price:</label>
+    <input type="text" id="Price" name="Price"><br><br></input>
+     <label for="Thumbnail">Thumbnail:</label>
+    <input type="text" id="Thumbnail" name="Thumbnail"><br><br></input>
+    <label for="Code">Code:</label>
+    <input type="text" id="Code" name="Code"><br><br></input>
+    <label for="Stock">Stock:</label>
+    <input type="text" id="Stock" name="Stock"><br><br></input>
+    <button id="postButton">POST </button>
+    <br><br><br>
+
+    <label for="idInput">Id:</label>
+    <input type="text" id="idInput" name="idInput"><br><br></input>
+    <button id="deleteButton">Delete</button>
+
+
     <h1>Lista Productos Actualizada con socket.io: 
         <p id="outPutData" class="listaProductos"> 
             {{productsData}}
@@ -11,6 +28,6 @@
 
  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>   <!-- Permite instanciar el socket desde el lado del cliente -->
-<script type="module" src="js/index.mjs"></script> <!-- vinculamos logica JS del cliente, para que este disponible en la renderizacion del lado del servidor -->
+<script type="module" src="../js/index.mjs"></script> <!-- vinculamos logica JS del cliente, para que este disponible en la renderizacion del lado del servidor -->
 
 

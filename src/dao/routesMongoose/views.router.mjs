@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { productManager } from "../routesFS/productManager.mjs";
-const appProductManager = new productManager('./productos.json')
+import { Product } from "../../dao/models/products.models.mjs";
+/* const appProductManager = new productManager('./productos.json') */
 export const routerViews = Router()
 export const routerViewsRealTimeProducts = Router()
 let productsData
@@ -8,18 +8,40 @@ import { io } from "../../app.mjs";
 
 
 // Test de renderizado
-routerViews.get('/', async (req, res) => {
+routerViews.get('/:pId?', async (req, res) => {
+  const pId = req.params.pId
+  const limit = req.query.limit
   // Renderiza la vista 'home' con Handlebars
-  
-    productsData = await appProductManager.getProducts()
-    res.render('index',  {productsData}); // En app.engine(app.mjs) establecemos que el layout principal sea main, luego todos los render van hacerlo dentro de main por defecto
+  try{
+    if(!pId) {
+        productsData = await Product.find().limit(limit)
+        res.render('index',  {productsData}); // En app.engine(app.mjs) establecemos que el layout principal sea main, luego todos los render van hacerlo dentro de main por defecto
+        return
+      } else {
+      productsData = await Product.findById(pId)
+      res.render('index',  {productsData}); 
+      return
+    }
+    }catch(error) {
+      res.status(500).json({
+        mensaje: "Error en id",
+        error: error.message
+      })
+    }
   });
 
 
-// Renderizar Vista con datos originales en file productos.json
-  routerViewsRealTimeProducts.get('/', async (req, res) => {
-    productsData = await appProductManager.getProducts();
+// Renderizar Vista con datos actualizados
+  routerViewsRealTimeProducts.get('/products/', async (req, res) => {
+    try {
+    const productsData = await Product.find()
     res.render('realTimeProducts', { productsData });
+  }catch(error) {
+    res.status(500).json({
+      mensaje: 'Error en metodo GET de RealTimeProducts.handlebars',
+      error: error.message
+    })
+  }
 });
 
  
