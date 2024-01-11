@@ -22,6 +22,7 @@ import { cartsRoutes } from '../src/dao/routesMongoose/carts.mjs'
 import { routerViews, routerViewsRealTimeProducts, } from '../src/dao/routesMongoose/views.router.mjs'
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { chatRoutes } from '../src/dao/routesMongoose/chat.mjs'
 const __filename = fileURLToPath(import.meta.url); //  proporciona la ruta completa al archivo actual, incluyendo el nombre del archivo (app.mjs en este caso).
 const __dirname = dirname(__filename); // proporciona la ruta completa al directorio que contiene el archivo actual.
 
@@ -41,6 +42,7 @@ app.use('/api/products', productRoutes)
 app.use('/api/carts', cartsRoutes)
 app.use('/', routerViews)
 app.use('/realTimeProducts', routerViewsRealTimeProducts)
+app.use('/chat', chatRoutes)
 
 
 
