@@ -38,11 +38,11 @@ app.set('view engine', 'handlebars'); // Establece 'handlebars' como la extensi�
 app.set('views', __dirname+'/views' ) // Establece la ruta del directorio de vistas. Indica que las plantillas se encuentran en el directorio 'views' que está ubicado en el mismo directorio que el archivo de configuración.
 
 app.use(express.static(__dirname+'/public'))
-app.use('/api/products', productRoutes)
-app.use('/api/carts', cartsRoutes)
-app.use('/', routerViews)
-app.use('/realTimeProducts', routerViewsRealTimeProducts)
-app.use('/chat', chatRoutes)
+app.use('/api/products', productRoutes) // no tiene renderizacion de vista
+app.use('/api/carts', cartsRoutes) // no tiene renderizacion de vista
+app.use('/', routerViews) // no tiene renderizacion de vista
+app.use('/realTimeProducts', routerViewsRealTimeProducts) // vista
+app.use('/chat', chatRoutes) // vista
 
 
 

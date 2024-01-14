@@ -30,6 +30,14 @@ const productSchema = new mongoose.Schema ({
         type: Number,
         required: true
     },
+    available: {
+        type: String,
+        required: true
+    },
+    category: {
+        type: String,
+        required: true
+    }
 })
 
 export const Product = mongoose.model('Product', productSchema, 'products'); // ('nombre modelo', 'schema a utilizar', 'nombre de la coleccion' )

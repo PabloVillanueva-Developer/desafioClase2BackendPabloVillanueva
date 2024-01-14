@@ -53,12 +53,9 @@ cartsRoutes.post('/:cId/product/:pId?', async (req, res) => {
             mensaje: 'Error en al intentar registrar producto en base de datos',
             error: error.message
           })
-        }
-    
+        }    
     }
     })
-
-
 
 
 // DELETE | Descuenta productos coincidente del carrito y si llega a cero lo elimina del array del carrito.

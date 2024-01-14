@@ -7,6 +7,8 @@
   let thumbnail = document.getElementById('Thumbnail')
   let code = document.getElementById('Code')
   let stock = document.getElementById('Stock')
+  let available = document.getElementById('Available')
+  let category = document.getElementById('Category')
   let idInput = document.getElementById('idInput')
   let mail = document.getElementById('Mail')
   let message = document.getElementById('Message')
@@ -22,22 +24,25 @@
           "thumbnail":thumbnail.value,
           "code":code.value,
           "stock":stock.value,
-          "status":true
+          "status":true,
+          "available": available.value,
+          "category": category.value
       }
-        console.log(postData)
+        if(postData.available !== 'yes' && postData.available !== 'no') {
+        throw new Error ('Se produjo un error en el campo "Available". Solo se permiten "yes" o "no"')
+        }
         // Realiza una solicitud POST al servidor y espera la respuesta
           const response = await axios.post('/api/products', postData);
           console.log('Respuesta del servidor:', response.data);       
 
       } catch (error) {
-          console.error('Error en la solicitud:', error);
+          console.error('Error en la solicitud:', error.message);
       }
   };
 
   const deleteClick = async () => {
       try {
           const idValue = idInput.value
-  
         // Solicitud DELETE al servidor y espera la respuesta
           const response = await axios.delete(`/api/products/${idValue}`);
           console.log('Respuesta del servidor:', response.data);
@@ -54,7 +59,6 @@ const sendClick = async () => {
         "user": mail.value,
         "message": message.value,
     }
-      console.log(sendData)
       // Realiza una solicitud POST al servidor y espera la respuesta
         const response = await axios.post('/chat', sendData);
         console.log('Respuesta del servidor:', response.data);       
